@@ -5,7 +5,7 @@ def setup():
    print "setup fixture"
 
 def test_login(setup):
-   assert(0==1)
+   assert(0==0)
 
 def test_login_2(setup):
    assert(1==1)
