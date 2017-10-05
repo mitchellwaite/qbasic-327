@@ -1,0 +1,26 @@
+Please enter the session type.
+Logged in as Agent.
+Please enter an account number to transfer from.
+Please enter an account number to transfer to.
+Please enter the amount you want to transfer.
+Invalid transfer amount: $1000000.00.
+You have been successfully logged out from Agent.
+Please enter the session type.
+Logged in as Machine.
+Please enter an account number to transfer from.
+Please enter an account number to transfer to.
+Please enter the amount you want to transfer.
+Invalid transfer amount: 1000.01
+Please enter an account number to transfer from.
+Invalid account number: abc.
+Please enter an account number to transfer from.
+Account #7654321 does not exist.
+Please enter an account number to transfer from.
+Please enter an account number to transfer to.
+Please enter the amount you want to transfer.
+Invalid transfer amount: $0.00.
+Please enter an account number to transfer from.
+Please enter an account number to transfer to.
+Please enter the amount you want to transfer.
+Invalid transfer amount: $-1.00.
+You have been successfully logged out from Machine.

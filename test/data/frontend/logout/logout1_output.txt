@@ -1,0 +1,3 @@
+Please enter the session type.
+Logged in as Machine.
+You are logged out from Machine.

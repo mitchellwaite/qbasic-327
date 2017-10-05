@@ -1,0 +1,27 @@
+login
+agent
+createacct
+3456789
+Daniel Jones1
+createacct
+3456788
+thr
+createacct
+3456787
+thirtycharacteraccname_abcdefg
+deposit
+3456789
+99999999
+withdraw
+3456789
+99999999
+transfer
+3456789
+2345678
+99999999
+transfer
+1234567
+3456789
+99999999
+logout
+quit

@@ -1,0 +1,15 @@
+login
+agent
+transfer
+1234567
+2345678
+99999999
+logout
+login
+machine
+transfer
+1234567
+2345678
+100000
+logout
+quit

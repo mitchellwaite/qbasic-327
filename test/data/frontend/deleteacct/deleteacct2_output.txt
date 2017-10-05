@@ -1,0 +1,4 @@
+Please enter the session type.
+Logged in as Machine.
+You do not have permissions to delete accounts.
+You have been successfully logged out from Machine.

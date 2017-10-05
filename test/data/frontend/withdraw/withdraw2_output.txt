@@ -1,0 +1,52 @@
+Please enter the session type.
+Logged in as Agent.
+Please enter an account number to withdraw from.
+Please enter the amount you want to withdraw.
+Invalid withdraw amount: $1000000.00.
+You have been successfully logged out from Agent.
+Please enter the session type.
+Logged in as Machine.
+Please enter an account number to withdraw from.
+Please enter the amount you want to withdraw.
+Invalid withdraw amount: $1000.01
+Please enter an account number to withdraw from.
+Please enter the amount you want to withdraw.
+$900.00 has been successfully withdrawn from account #1234567.
+Please enter an account number to withdraw from.
+Please enter the amount you want to withdraw.
+Invalid Withdrawal: withdrawal would exceed session limit for account #1234567.
+Please enter an account number to withdraw from.
+Please enter the amount you want to withdraw.
+$100.00 has been successfully withdrawn from account #1234567.
+Please enter an account number to withdraw from.
+Please enter the amount you want to withdraw.
+Invalid Withdrawal: Account #1234567 has exceeded its session withdraw limit.
+Please enter an account number to withdraw from.
+Please enter the amount you want to withdraw.
+$900.00 has been successfully withdrawn from account #2345678.
+Please enter an account number to withdraw from.
+Please enter the amount you want to withdraw.
+Invalid Withdrawal: withdrawal would exceed session limit for account #2345678.
+Please enter an account number to withdraw from.
+Please enter the amount you want to withdraw.
+$100.00 has been successfully withdrawn from account #2345678.
+Please enter an account number to withdraw from.
+Please enter the amount you want to withdraw.
+Invalid Withdrawal: Account #2345678 has exceeded its session withdraw limit.
+Please enter an account number to withdraw from.
+Invalid account number: abc.
+Please enter an account number to withdraw from.
+Account #7654321 does not exist.
+Please enter an account number to withdraw from.
+Please enter the amount you want to withdraw.
+Invalid withdraw amount: $0.00.
+Please enter an account number to withdraw from.
+Please enter the amount you want to withdraw.
+Invalid withdraw amount: $-1.00.
+Please enter an account number to withdraw from.
+Please enter the amount you want to withdraw.
+Invalid withdrawal amount: 1.11. You must enter the amount in an integral quantity of cents.
+Please enter an account number to withdraw from.
+Please enter the amount you want to withdraw.
+Invalid withdrawal amount: abc.
+You have been successfully logged out from Machine.

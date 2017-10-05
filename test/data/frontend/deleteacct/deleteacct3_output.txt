@@ -1,0 +1,30 @@
+Please enter the session type.
+Logged in as Agent.
+Please enter an account number to delete.
+Invalid account number: 0123456.
+Please enter an account number to delete.
+Account #3456789 does not exist.
+Please enter an account number to delete.
+Invalid account number: 123456.
+Please enter an account number to delete.
+Invalid account number: 12345678.
+Please enter an account number to delete.
+Invalid account number: abc.
+Please enter an account number to delete.
+Please enter an account name to delete.
+Invalid account name: Tes
+Please enter an account number to delete.
+Please enter an account name to delete.
+Invalid account name: TesterTesterTesterTesterTesterT
+Please enter an account number to delete.
+Please enter an account name to delete.
+Invalid account name:  SpaceBegin
+Please enter an account number to delete.
+Please enter an account name to delete.
+Invalid account name: SpaceEnd
+Please enter an account number to delete.
+Please enter an account name to delete.
+Account #1234567 with name Test has been successfully deleted.
+Please enter an account number to delete.
+Unable to delete: account number #1234567 is pending deletion.
+You have been successfully logged out from Agent.

@@ -1,0 +1,13 @@
+login
+agent
+deposit
+1234567
+99999999
+logout
+login
+machine
+deposit
+1234567
+100000
+logout
+quit

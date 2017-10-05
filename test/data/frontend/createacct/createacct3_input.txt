@@ -1,0 +1,16 @@
+login
+agent
+createacct
+0123456
+createacct
+123456
+createacct
+12345678
+createacct
+1234567
+createacct
+123abc
+createacct
+123!@#
+logout
+quit

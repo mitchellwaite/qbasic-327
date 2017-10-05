@@ -1,0 +1,15 @@
+Please enter the session type.
+Logged in as Agent.
+Please enter an account number to create.
+Invalid account number: 0123456.
+Please enter an account number to create.
+Invalid account number: 123456.
+Please enter an account number to create.
+Invalid account number: 12345678.
+Please enter an account number to create.
+Invalid account number: Account #1234567 already exists.
+Please enter an account number to create.
+Invalid account number: 123abc.
+Please enter an account number to create.
+Invalid account number: 123!@#.
+You have been successfully logged out from Agent.

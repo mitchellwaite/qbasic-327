@@ -1,0 +1,12 @@
+Please enter the session type.
+Logged in as Machine.
+You have been successfully logged out from Machine.
+Please log in before running any transactions.
+Please log in before running any transactions.
+Please log in before running any transactions.
+Please log in before running any transactions.
+Please log in before running any transactions.
+Please log in before running any transactions.
+Please enter the session type.
+Logged in as Machine.
+You have been successfully logged out from Machine.

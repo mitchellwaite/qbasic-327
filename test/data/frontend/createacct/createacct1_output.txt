@@ -1,0 +1,26 @@
+Please enter the session type.
+Logged in as Agent.
+Please enter an account number to create.
+Please enter an account name to create.
+Account #3456789 with name Daniel Jones1 has been successfully created.
+Please enter an account number to create.
+Please enter an account name to create.
+Account #3456788 with name thr has been successfully created.
+Please enter an account number to create.
+Please enter an account name to create.
+Account #3456787 with name thirtycharacteraccname_abcdefg has been successfully created.
+Please enter an account number to deposit into.
+Please enter the amount you want to deposit.
+Unable to deposit: account number #3456787 is a new account.
+Please enter an account number to withdraw from.
+Please enter the amount you want to withdraw.
+Unable to withdraw: account number #3456787 is a new account.
+Please enter an account number to transfer from.
+Please enter an account number to transfer to.
+Please enter the amount you want to transfer.
+Unable to transfer: account number #3456787 is a new account.
+Please enter an account number to transfer from.
+Please enter an account number to transfer to.
+Please enter the amount you want to transfer.
+Unable to transfer: account number #3456787 is a new account.
+You have been successfully logged out from Agent.

@@ -1,0 +1,16 @@
+login
+agent
+createacct
+3456789
+Te
+createacct
+3456789
+TesterTesterTesterTesterTesterT
+createacct
+3456789
+ SpaceBegin
+createacct
+3456789
+SpaceEnds
+logout
+quit
