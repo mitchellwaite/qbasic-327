@@ -13,5 +13,5 @@ notifications:
       - 12pm30@queensu.ca
 #      - 12maw9@queensu.ca
       - 12ccyf@queensu.ca
-    on_success: always # default: change
+    on_success: change # default: change
     on_failure: always # default: always
