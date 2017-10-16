@@ -2,4 +2,6 @@
 
 # Runs pytest and dumps stdout to a log file in the "res" directory
 
-pytest | tee "res/$(date "+%Y%h%d_%H%M%S").log"
+cd test
+
+pytest | tee "../res/$(date "+%Y%h%d_%H%M%S").log"

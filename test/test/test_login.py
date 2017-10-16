@@ -1,29 +1,44 @@
 import pytest
 import pexpect
+import os
+import macros
 
-mainPyCommand = "python ../../src/main.py"
+mainPyCommand = "python ../../src/main.py -o ../tmp -v ../data/frontend/common/valid_accounts.txt"
 
 @pytest.fixture
 def setup():
-   print "setup fixture"
+   macros.removeTempDirs()
+
+def run_test(child, input, output):
+    child.sendline(input)
+    idx = child.expect_exact([output,pexpect.TIMEOUT,pexpect.EOF],1)
+
+    tmpLines = child.before.splitlines()
+    actualOutput = tmpLines[len(tmpLines) - 2]
+
+    if idx != 0:
+        print "Error: expected output did not match actual output!\nCommand: {}\nExpected: {}\nActual: {}\n".format(input,output,actualOutput)
+
+    return idx
 
 def test_login(setup):
-   child = pexpect.spawn(mainPyCommand)
-   
-   child.sendline("lmao")
+    rc = 0
 
-   idx = child.expect(['Unknown Command: lmao','(.*?)'])
-   print child.before
+    inputs = [line.strip() for line in open('../data/frontend/login/login2_input.txt')]
+    outputs = [line.strip() for line in open('../data/frontend/login/login2_output.txt')]
 
-   if child.isalive():
-      child.close()
+    #print inputs
+    #print outputs
 
-   print "index = {}".format(idx)
+    combined = []
 
-   assert(idx == 0)
+    for i in range(0,len(inputs)):
+        tmpTuple = [inputs[i], outputs[i]]
+        combined.append(tmpTuple)
 
-def test_login_2(setup):
-   assert(1==1)
+    child = pexpect.spawn(mainPyCommand)
 
-def test_login_3(setup):
-   raise ValueError
+    for i,o in combined:
+        rc |= run_test(child,i,o)
+
+    assert(rc == 0)

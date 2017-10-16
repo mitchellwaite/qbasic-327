@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import sys
+import sys, getopt
 import readline
 from qbMod import *
 
@@ -7,11 +7,33 @@ from qbMod import *
 validAccountsList = []
 transactionList = []
 
+validAccoutsListPath = "validaccounts.txt"
+transactionListPath = ""
+
 def main():
 
     #control variables
     mainLoop = True;
     sessionType = "login"
+
+    # Set up parameters, so we can customize the locations of the inputs/outputs
+    try:
+
+        opts, args = getopt.getopt(sys.argv[1:],"v:o:")
+
+        for opt, arg in opts:
+            if opt == "-v":
+                #Path to the valid accounts file
+                validAccoutsListPath = arg
+                print messages.getMessage("custValidPath", arg)
+            elif opt == "-o":
+                #Path to the place we want to store the transaction lists
+                transactionListPath = arg
+                print messages.getMessage("custTxPath", arg)
+    except Exception as e:
+        mainLoop = False
+        print messages.getMessage("fatalError",str(e))
+        return -1
 
     print messages.getMessage("welcome")
 
@@ -29,6 +51,7 @@ def main():
                     # if the login was successful, we need to read the valid
                     # accounts file and set the session type
                     sessionType = loginSessionType
+                    print messages.getMessage("loggedIn",sessionType)
 
             elif command == "logout":
                     logoutSuccess = session.doLogout(sessionType)
@@ -36,7 +59,9 @@ def main():
                     if logoutSuccess:
                         # if the logout was successful, we neet to write a tx file
                         # and set the session type
+                        print messages.getMessage("loggedOut",sessionType)
                         sessionType = session.loggedOutSessionType
+
             elif command in ["createacct","deleteacct","deposit","withdraw","transfer"]:
                 print messages.getMessage("notImplemented", command)
             else:
