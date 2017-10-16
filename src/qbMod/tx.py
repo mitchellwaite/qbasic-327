@@ -1,66 +1,61 @@
-import messages, session, os
+import messages
+import session
+import os
 
-class Factory:
-    @staticmethod
-    def makeTxCreate(number,name):
-        return makeTx("NEW",number,None,None,name)
 
-    @staticmethod
-    def makeTxDelete(number,name):
-        return makeTx("DEL",number,None,None,name)
+def makeTxCreate(number,name):
+    return makeTx("NEW",None,number,None,name)
 
-    @staticmethod
-    def makeTxWithdraw(number, amt):
-        return makeTx("WDR",number,None,None,name)
+def makeTxDelete(number,name):
+    return makeTx("DEL",None,number,None,name)
 
-    @staticmethod
-    def makeTxDeposit():
-        return makeTx("DEP",number,None,None,name)
+def makeTxWithdraw(number, amt):
+    return makeTx("WDR",amt,number,None,None)
 
-    @staticmethod
-    def makeTxTransfer():
-        return makeTx("XFR",number,None,None,name)
+def makeTxDeposit(number, amt):
+    return makeTx("DEP",amt,number,None,None)
 
-    @staticmethod
-    def makeTx(code, amt, fromAcct, toAcct, name):
-        intAmt = "000"
-        intTo = "0000000"
-        intName = "***"
 
-        if toAcct is not None:
-            intTo = str(to)
+def makeTxTransfer(numberFrom, numberTo, amt):
+    return makeTx("XFR",amt,numberFrom,numberTo,None)
 
-        if name is not None:
-            intName = name
+def makeTx(code, amt, fromAcct, toAcct, name):
+    intAmt = "000"
+    intTo = "0000000"
+    intName = "***"
 
-        if amt is not None:
-            intAmt = str(amt)
+    if toAcct is not None:
+        intTo = str(toAcct)
 
-        transaction = {
-            "code" : code,
-            "amount" : intAmt,
-            "from" : fromAcct,
-            "to" : intTo,
-            "name" : intName
-        }
+    if name is not None:
+        intName = name
 
-        return transaction
+    if amt is not None:
+        intAmt = str(amt)
 
-    @staticmethod
-    def makeFinalTx():
-        transaction = {
-            "code" : "EOS",
-            "amount" : "000",
-            "from" : "0000000",
-            "to" : "0000000",
-            "name" : "***"
-        }
+    transaction = {
+        "code" : code,
+        "amount" : intAmt,
+        "from" : fromAcct,
+        "to" : intTo,
+        "name" : intName
+    }
 
-        return transaction
+    return transaction
+
+def makeFinalTx():
+    transaction = {
+        "code" : "EOS",
+        "amount" : "000",
+        "from" : "0000000",
+        "to" : "0000000",
+        "name" : "***"
+    }
+
+    return transaction
 
 def writeTransactionList(txList, txSummaryOutputDir):
     fileCounter = 0
-    outputList = []
     outputFilePath = txSummaryOutputDir + "/txSummary_{}.txt".format(fileCounter)
 
     while os.path.exists(outputFilePath):
@@ -70,15 +65,28 @@ def writeTransactionList(txList, txSummaryOutputDir):
 
     outFile = open(outputFilePath, 'w')
 
-    txList.append(Factory.makeFinalTx())
+    txList.append(makeFinalTx())
     for tx in txList:
         outFile.write("{} {} {} {} {}\n".format(tx["code"], tx["amount"], tx["from"], tx["to"], tx["name"]))
 
     outFile.close()
 
 
-def doCreateAcct():
-    pass
+def doCreateAcct(sessionType, validAccounts, accountsPendingCreation, accountsPendingDeletion):
+
+    if sessionType == session.loggedOutSessionType:
+        print messages.getMessage("mustBeAgent","create an account")
+        return False, None, None
+    elif sessionType != session.privilegedSessionType:
+        print messages.getMessage("mustBeAgent","create an account")
+        return False, None, None
+    else:
+        accountNumber = raw_input(messages.getMessage("pleaseEnter","account number") + "> ")
+
+        if len(accountNumber) != 7  or accountNumber.startswith(" ") or accountNumber.endswith(" ") or accountNumber.startswith("0"):
+            pass
+
+
 
 def doDeleteAcct():
     pass

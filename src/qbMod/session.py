@@ -1,7 +1,9 @@
 import messages
 
-validSessionTypes = ["agent", "machine"]
 loggedOutSessionType = "login"
+privilegedSessionType = "agent"
+
+validSessionTypes = [privilegedSessionType, "machine"]
 
 def doLogin(currentSession, loginParam):
     if currentSession in validSessionTypes:
