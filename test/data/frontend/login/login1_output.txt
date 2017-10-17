@@ -1,7 +1,8 @@
-Invalid session type: badType.
-Please log in before running any transactions.
-Please log in before running any transactions.
-Please log in before running any transactions.
-Please log in before running any transactions.
-Please log in before running any transactions.
-Please log in before running any transactions.
+Please enter session type
+Invalid session type: badType
+You must log in to run transactions.
+You must log in to run transactions.
+You must log in to run transactions.
+You must log in to run transactions.
+You must log in to run transactions.
+You must log in to run transactions.

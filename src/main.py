@@ -62,13 +62,13 @@ def main():
 
     while mainLoop:
         try:
-            inputArgs = raw_input("{}> ".format(sessionType)).split(" ")
-            command = inputArgs[0]
+            inputArgs = raw_input("{}> ".format(sessionType))
+            command = inputArgs
 
             if command == "quit":
                 mainLoop = False
             elif command == "login":
-                loginSuccess, loginSessionType = session.doLogin(sessionType, inputArgs)
+                loginSuccess, loginSessionType = session.doLogin(sessionType)
 
                 if loginSuccess:
                     # if the login was successful, we need to read the valid

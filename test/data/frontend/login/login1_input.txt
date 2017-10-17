@@ -1,4 +1,5 @@
-login badType
+login
+badType
 createacct
 deleteacct
 deposit

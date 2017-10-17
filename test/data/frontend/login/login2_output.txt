@@ -1,2 +1,3 @@
+Please enter session type
 Logged in as machine.
 Successfully logged out.
