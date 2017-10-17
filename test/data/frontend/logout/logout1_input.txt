@@ -1,4 +1,2 @@
-login
-machine
+login machine
 logout
-quit

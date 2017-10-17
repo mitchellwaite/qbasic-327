@@ -1,9 +1,7 @@
-login
-badType
+login badType
 createacct
 deleteacct
 deposit
 withdraw
 transfer
 logout
-quit

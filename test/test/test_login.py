@@ -3,33 +3,15 @@ import pexpect
 import os
 import macros
 
-mainPyCommand = "python {} -o {} -v {}/frontend/common/valid_accounts.txt".format(macros.mainPyLocation(), macros.testTempDir(), macros.testDataDir())
-mydir = os.path.dirname(os.path.realpath(__file__))
-
 @pytest.fixture
 def setup():
    macros.removeTempDirs()
 
-def run_test(child, input, output):
-    child.sendline(input)
-    idx = child.expect_exact([output,pexpect.TIMEOUT,pexpect.EOF],1)
-
-    tmpLines = child.before.splitlines()
-    actualOutput = tmpLines[len(tmpLines) - 2]
-
-    if idx != 0:
-        print "Error: expected output did not match actual output!\nCommand: {}\nExpected: {}\nActual: {}\n".format(input,output,actualOutput)
-
-    return idx
-
-def test_login(setup):
+def test_login1(setup):
     rc = 0
 
-    inputs = [line.strip() for line in open(macros.testDataDir() + '/frontend/login/login2_input.txt')]
-    outputs = [line.strip() for line in open(macros.testDataDir() + '/frontend/login/login2_output.txt')]
-
-    #print inputs
-    #print outputs
+    inputs = [line.strip() for line in open(macros.testDataDir() + '/frontend/login/login1_input.txt')]
+    outputs = [line.strip() for line in open(macros.testDataDir() + '/frontend/login/login1_output.txt')]
 
     combined = []
 
@@ -37,9 +19,85 @@ def test_login(setup):
         tmpTuple = [inputs[i], outputs[i]]
         combined.append(tmpTuple)
 
-    child = pexpect.spawn(mainPyCommand)
+    child = macros.spawnFrontend()
 
     for i,o in combined:
-        rc |= run_test(child,i,o)
+        rc |= macros.run_test(child,i,o)
+
+    assert(rc == 0)
+
+def test_login2(setup):
+    rc = 0
+
+    inputs = [line.strip() for line in open(macros.testDataDir() + '/frontend/login/login2_input.txt')]
+    outputs = [line.strip() for line in open(macros.testDataDir() + '/frontend/login/login2_output.txt')]
+
+    combined = []
+
+    for i in range(0,len(inputs)):
+        tmpTuple = [inputs[i], outputs[i]]
+        combined.append(tmpTuple)
+
+    child = macros.spawnFrontend()
+
+    for i,o in combined:
+        rc |= macros.run_test(child,i,o)
+
+    assert(rc == 0)
+
+def test_login3(setup):
+    rc = 0
+
+    inputs = [line.strip() for line in open(macros.testDataDir() + '/frontend/login/login3_input.txt')]
+    outputs = [line.strip() for line in open(macros.testDataDir() + '/frontend/login/login3_output.txt')]
+
+    combined = []
+
+    for i in range(0,len(inputs)):
+        tmpTuple = [inputs[i], outputs[i]]
+        combined.append(tmpTuple)
+
+    child = macros.spawnFrontend()
+
+    for i,o in combined:
+        rc |= macros.run_test(child,i,o)
+
+    assert(rc == 0)
+
+def test_login4(setup):
+    rc = 0
+
+    inputs = [line.strip() for line in open(macros.testDataDir() + '/frontend/login/login4_input.txt')]
+    outputs = [line.strip() for line in open(macros.testDataDir() + '/frontend/login/login4_output.txt')]
+
+    combined = []
+
+    for i in range(0,len(inputs)):
+        tmpTuple = [inputs[i], outputs[i]]
+        combined.append(tmpTuple)
+
+    child = macros.spawnFrontend()
+
+    for i,o in combined:
+        rc |= macros.run_test(child,i,o)
+
+    assert(rc == 0)
+
+def test_login5(setup):
+    rc = 0
+
+    inputs = [line.strip() for line in open(macros.testDataDir() + '/frontend/login/login5_input.txt')]
+    outputs = [line.strip() for line in open(macros.testDataDir() + '/frontend/login/login5_output.txt')]
+
+    combined = []
+
+    for i in range(0,len(inputs)):
+        tmpTuple = [inputs[i], outputs[i]]
+        combined.append(tmpTuple)
+
+    child = macros.spawnFrontend()
+
+    for i,o in combined:
+        rc |= macros.run_test(child,i,o)
 
     assert(rc == 0)

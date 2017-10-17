@@ -1,4 +1,3 @@
-Please enter the session type.
 Invalid session type: badType.
 Please log in before running any transactions.
 Please log in before running any transactions.
