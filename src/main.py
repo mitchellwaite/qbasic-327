@@ -51,6 +51,12 @@ def main():
     if not os.path.exists(transactionListPath):
         os.makedirs(transactionListPath)
 
+    if not os.path.exists(validAccoutsListPath):
+        # If no valid accounts list exists, create a blank one
+        with open(validAccoutsListPath, 'a') as newVaf:
+            newVaf.write("0000000\n")
+            newVaf.close()
+
     print messages.getMessage("welcome")
 
     while mainLoop:
@@ -66,6 +72,13 @@ def main():
                 if loginSuccess:
                     # if the login was successful, we need to read the valid
                     # accounts file and set the session type
+
+                    # Open and process the valid accounts list
+                    with open(validAccoutsListPath) as vaf:
+                        validAccountsList = vaf.readlines()
+                        validAccountsList = [x.strip() for x in validAccountsList]
+                        validAccountsList.remove("0000000")
+
                     sessionType = loginSessionType
                     print messages.getMessage("loggedIn", sessionType)
             elif command == "help":
@@ -80,7 +93,7 @@ def main():
                     if logoutSuccess:
                         # if the logout was successful, we neet to write a
                         # tx file, clear variables, and set the session type
-                        tx.writeTransactionList([], transactionListPath)
+                        tx.writeTransactionList(transactionList, transactionListPath)
 
                         del accountsPendingCreation[:]
                         del accountsPendingDeletion[:]
@@ -96,8 +109,17 @@ def main():
                 if createAccSuccess:
                     transactionList.append(transaction)
                     accountsPendingCreation.append(accountNumber)
+                    print messages.getMessage("accountCreated", accountNumber)
 
-            elif command in ["deleteacct", "deposit", "withdraw", "transfer"]:
+            elif command == "deleteacct":
+                deleteAccSuccess, transaction, accountNumber = tx.doDeleteAcct(sessionType, validAccountsList, accountsPendingCreation, accountsPendingDeletion)
+
+                if deleteAccSuccess:
+                    transactionList.append(transaction)
+                    accountsPendingDeletion.append(accountNumber)
+                    print messages.getMessage("accountDeleted", accountNumber)
+
+            elif command in ["deposit", "withdraw", "transfer"]:
                 print messages.getMessage("notImplemented", command)
             else:
                 print messages.getMessage("unknownCommand", command)
