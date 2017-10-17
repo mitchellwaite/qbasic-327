@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from qbMod import messages, tx, session
+from qbMod import messages, tx, session, qbUtil
 import sys
 import getopt
 import os
@@ -25,6 +25,7 @@ def main():
 
     accountsPendingCreation = []
     accountsPendingDeletion = []
+    accountsWithdrawalDict = {}
 
     validAccoutsListPath = "./validaccounts.txt"
     transactionListPath = "./out"
@@ -99,6 +100,7 @@ def main():
                         del accountsPendingDeletion[:]
                         del transactionList[:]
                         del validAccountsList[:]
+                        accountsWithdrawalDict.clear()
 
                         print messages.getMessage("loggedOut", sessionType)
                         sessionType = session.loggedOutSessionType
@@ -119,8 +121,34 @@ def main():
                     accountsPendingDeletion.append(accountNumber)
                     print messages.getMessage("accountDeleted", accountNumber)
 
-            elif command in ["deposit", "withdraw", "transfer"]:
-                print messages.getMessage("notImplemented", command)
+            elif command == "deposit":
+                depositSuccess, transaction, accountNumber, depositAmount = tx.doDeposit(sessionType, validAccountsList, accountsPendingCreation, accountsPendingDeletion)
+
+                if depositSuccess:
+                    transactionList.append(transaction)
+                    print messages.getMessage("depositSuccess", [qbUtil.centsToDollars(str(depositAmount)), accountNumber])
+
+            elif command == "transfer":
+                transferSuccess, transaction, accountNumber, transferAmount = tx.doTransfer(sessionType, validAccountsList, accountsPendingCreation, accountsPendingDeletion)
+
+                if transferSuccess:
+                    transactionList.append(transaction)
+                    print messages.getMessage("transferSuccess", [qbUtil.centsToDollars(str(transferAmount)), accountNumber])
+
+            elif command == "withdraw":
+                withdrawSuccess, transaction, accountNumber, depositAmount = tx.doWithdraw(sessionType, validAccountsList, accountsPendingCreation, accountsPendingDeletion, accountsWithdrawalDict)
+
+                if withdrawSuccess:
+                    transactionList.append(transaction)
+
+                    #add the dollar amount to the dictionary
+                    if accountNumber in accountsWithdrawalDict:
+                        accountsWithdrawalDict[accountNumber] = accountsWithdrawalDict[accountNumber] + int(depositAmount)
+                    else:
+                        accountsWithdrawalDict[accountNumber] = int(depositAmount)
+
+                    print messages.getMessage("withdrawSuccess", [qbUtil.centsToDollars(str(depositAmount)), accountNumber])
+
             else:
                 print messages.getMessage("unknownCommand", command)
         except KeyboardInterrupt:

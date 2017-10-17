@@ -27,7 +27,12 @@ message = {
     "txErrNotLoggedIn": "You must log in to run transactions.",
     "welcome": "Welcome to QBasic",
     "goodbye": "Thank you for using QBasic",
-    "pleaseEnter": "Please enter {}"
+    "pleaseEnter": "Please enter {}",
+    "depositSuccess": "Successfully deposit {} in to account #{}.",
+    "transferSuccess": "Successfully transferred {} to account #{}.",
+    "transferSameAccountError": "Could not transfer: 'From' and 'To' account numbers must be different.",
+    "withdrawLimitErr": "Could not withdraw: the transaction would exceed the $1000 session limit for account #{}",
+    "withdrawSuccess": "Successfully withdrew {} from account #{}"
 }
 
 

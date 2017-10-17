@@ -80,10 +80,19 @@ def validateNewDeleted(action, accountNumber, accountsPendingCreation, accountsP
     else:
         return True
 
-def getAcctNameNumber():
-    accountNumber = raw_input(messages.getMessage("pleaseEnter","account number") + "> ")
+def getAcctNumber(s = ""):
+    accountNumber = raw_input(messages.getMessage("pleaseEnter","account number" + s) + "> ")
 
     if len(accountNumber) != 7  or accountNumber.startswith(" ") or accountNumber.endswith(" ") or accountNumber.startswith("0") or not qbUtil.isInt(accountNumber):
+        print messages.getMessage("invalidCustom",["account number", accountNumber])
+        return False, None
+
+    return True, accountNumber
+
+def getAcctNameNumber():
+    result, accountNumber = getAcctNumber()
+
+    if False == result:
         print messages.getMessage("invalidCustom",["account number", accountNumber])
         return False, None, None
 
@@ -94,6 +103,25 @@ def getAcctNameNumber():
         return False, None, None
 
     return True, accountName, accountNumber
+
+def getDollarAmount(sessionType):
+
+    centsAmount = raw_input(messages.getMessage("pleaseEnter","an amount of money in cents") + "> ")
+
+    if not qbUtil.isInt(centsAmount):
+        print messages.getMessage("invalidCustom",["monetary amount", qbUtil.centsToDollars(centsAmount)])
+        return False, None
+
+    centsAmountInt = int(centsAmount)
+
+    if centsAmountInt <= 0 or (sessionType == session.privilegedSessionType and centsAmount > 99999999):
+        print messages.getMessage("invalidCustom",["monetary amount", qbUtil.centsToDollars(centsAmount)])
+        return False, None
+    elif centsAmountInt > 100000:
+        print messages.getMessage("mustBeAgent","execute transactions over $1000")
+        return False, None
+
+    return True, centsAmountInt
 
 def doCreateAcct(sessionType, validAccounts, accountsPendingCreation, accountsPendingDeletion):
 
@@ -153,11 +181,116 @@ def doDeleteAcct(sessionType, validAccounts, accountsPendingCreation, accountsPe
 
             return True, transaction, accountNumber
 
-def doWithdraw():
-    pass
+def doDeposit(sessionType, validAccounts, accountsPendingCreation, accountsPendingDeletion):
+    if sessionType == session.loggedOutSessionType:
+        print messages.getMessage("txErrNotLoggedIn")
+        return False, None, None, None
+    else:
+        # Get the acct name and number
+        result, accountNumber = getAcctNumber()
 
-def doDeposit():
-    pass
+        if False == result:
+            # There was an error getting the account info from the user
+            return False, None, None, None
 
-def doTransfer():
-    pass
+        # Validate that the account isn't a new or deleted account
+        if False == validateNewDeleted("deposit",accountNumber,accountsPendingCreation, accountsPendingDeletion):
+            return False, None, None, None
+
+        # Check if the account actually exists
+        if accountNumber not in validAccounts:
+            print messages.getMessage("accountDoesntExist",accountNumber)
+            return False, None, None, None
+
+        result, dollarAmount = getDollarAmount(sessionType)
+
+        if False == result:
+            # There was an error getting the dollar amount from the user
+            return False, None, None, None
+
+        transaction = makeTxDeposit(accountNumber, dollarAmount)
+
+        return True, transaction, accountNumber, dollarAmount
+
+def doTransfer(sessionType, validAccounts, accountsPendingCreation, accountsPendingDeletion):
+    if sessionType == session.loggedOutSessionType:
+        print messages.getMessage("txErrNotLoggedIn")
+        return False, None, None, None
+    else:
+        # Get the acct name and number
+        result, accountNumberFrom = getAcctNumber(" to transfer from")
+
+        # Validate that the account isn't a new or deleted account
+        if False == validateNewDeleted("transfer",accountNumberFrom,accountsPendingCreation, accountsPendingDeletion):
+            return False, None, None, None
+
+        # Check if the account actually exists
+        if accountNumberFrom not in validAccounts:
+            print messages.getMessage("accountDoesntExist",accountNumberFrom)
+            return False, None, None, None
+
+        # Get the acct name and number
+        result, accountNumberTo = getAcctNumber(" to transfer to")
+
+        # Validate that the account isn't a new or deleted account
+        if False == validateNewDeleted("transfer",accountNumberTo,accountsPendingCreation, accountsPendingDeletion):
+            return False, None, None, None
+
+        # Check if the account actually exists
+        if accountNumberTo not in validAccounts:
+            print messages.getMessage("accountDoesntExist",accountNumberTo)
+            return False, None, None, None
+
+        # Check if "from" and "to" accounts are the same
+        if accountNumberFrom == accountNumberTo:
+            print messages.getMessage("transferSameAccountError")
+            return False, None, None, None
+
+        result, dollarAmount = getDollarAmount(sessionType)
+
+        if False == result:
+            # There was an error getting the dollar amount from the user
+            return False, None, None, None
+
+        transaction = makeTxTransfer(accountNumberFrom, accountNumberTo, dollarAmount)
+
+        return True, transaction, accountNumberTo, dollarAmount
+
+def doWithdraw(sessionType, validAccounts, accountsPendingCreation, accountsPendingDeletion, accountsWithdrawalDict):
+        if sessionType == session.loggedOutSessionType:
+            print messages.getMessage("txErrNotLoggedIn")
+            return False, None, None, None
+        else:
+            # Get the acct name and number
+            result, accountNumber = getAcctNumber()
+
+            if False == result:
+                # There was an error getting the account info from the user
+                return False, None, None, None
+
+            # Validate that the account isn't a new or deleted account
+            if False == validateNewDeleted("withdraw",accountNumber,accountsPendingCreation, accountsPendingDeletion):
+                return False, None, None, None
+
+            # Check if the account actually exists
+            if accountNumber not in validAccounts:
+                print messages.getMessage("accountDoesntExist",accountNumber)
+                return False, None, None, None
+
+            result, dollarAmount = getDollarAmount(sessionType)
+
+            if False == result:
+                # There was an error getting the dollar amount from the user
+                return False, None, None, None
+
+            #check to see if we would hit a withdrawal limit
+            if sessionType != session.privilegedSessionType:
+                if accountNumber in accountsWithdrawalDict:
+                    if (accountsWithdrawalDict[accountNumber] + int(dollarAmount)) > 100000:
+                        #We can't go over $1000 in a session
+                        print messages.getMessage("withdrawLimitErr",accountNumber)
+                        return False, None, None, None
+
+            transaction = makeTxWithdraw(accountNumber, dollarAmount)
+
+            return True, transaction, accountNumber, dollarAmount
