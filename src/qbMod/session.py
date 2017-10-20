@@ -1,10 +1,19 @@
+# FILE: session.py
+# DESC: Methods and definitions related to the QBasic session and session types
 import messages
 
+# Variables to represent special session types
 loggedOutSessionType = "login"
 privilegedSessionType = "agent"
 
+# Valid logged in session types
 validSessionTypes = [privilegedSessionType, "machine"]
 
+# Performs a login
+#
+# @param currentSession -> string -> current QBasic session type
+# @return boolean -> whether the login attempt succeeded
+# @return string -> the new session type, if login succeeded
 def doLogin(currentSession):
     if currentSession in validSessionTypes:
         # If the current session is in the valid list, then we don't need
@@ -27,8 +36,13 @@ def doLogin(currentSession):
     # when the user is already logged in)
     return False, currentSession
 
+# Performs a logout
+#
+# @param currentSession -> string -> current QBasic session type
+# @return string -> the new session type, if logout succeeded
 def doLogout(currentSession):
     if currentSession in validSessionTypes:
-        return loggedOutSessionType
+        return True
     else:
         print messages.getMessage("alreadyLoggedOut")
+        return False

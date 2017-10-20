@@ -1,5 +1,6 @@
 import types
 
+# List of message format strings, used for calls to the getMessage function
 message = {
     "test": "this is a test",
     "notImplemented": "{} has not been implemented yet.",
@@ -35,7 +36,12 @@ message = {
     "withdrawSuccess": "Successfully withdrew {} from account #{}"
 }
 
-
+# Selects the message from the above list, and applies the format string or
+# list of format strings to the message, then returns it to the caller
+#
+# @param messageToGet -> string -> selects the message format string
+# @param stringRep -> string or list of strings -> to apply to the message
+# @return string -> formatted message
 def getMessage(messageToGet, stringRep=[]):
     stringRepInt = None
 
