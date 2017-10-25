@@ -4,4 +4,6 @@
 
 cd test
 
-pytest | tee "../res/$(date "+%Y%h%d_%H%M%S").log"
+datecode=$(date "+%Y%h%d_%H%M%S")
+
+pytest -rapP --junitxml ../res/$datecode.xml | tee "../res/$datecode.log"

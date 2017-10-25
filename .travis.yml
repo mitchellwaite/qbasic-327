@@ -6,12 +6,11 @@ install:
   - pip install -r requirements.txt
 # command to run tests
 script:
-  - pytest
+  - pytest -rapP --junitxml test/res/output.xml
+  - python test/xml2table.py test/res/output.xml
 notifications:
   email:
     recipients:
-      - 12pm30@queensu.ca
-#      - 12maw9@queensu.ca
-      - 12ccyf@queensu.ca
-    on_success: change # default: change
+      - 12maw9@queensu.ca
+    on_success: always # default: change
     on_failure: always # default: always
