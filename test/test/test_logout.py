@@ -10,21 +10,42 @@ def setup():
 def test_logout1(setup):
     rc = 0
 
-    inputs = [line.strip() for line in open(macros.testDataDir() + '/frontend/logout/logout1_input.txt')]
-    outputs = [line.strip() for line in open(macros.testDataDir() + '/frontend/logout/logout1_output.txt')]
-
-    combined = []
-
-    for i in range(0,len(inputs)):
-        tmpTuple = [inputs[i], outputs[i]]
-        combined.append(tmpTuple)
+    combined = macros.getIoList(macros.testDataDir() + '/frontend/logout/logout1_input.txt',
+                                macros.testDataDir() + '/frontend/logout/logout1_output.txt')
 
     child = macros.spawnFrontend()
 
     for i,o in combined:
         rc |= macros.run_test(child,i,o)
 
+    child.close()
+
     assert(rc == 0)
 
 def test_logout1_txSummary():
-    assert(macros.compare_files(macros.testTempDir() + "/txSummary_0.txt", macros.testDataDir() + "/frontend/common/transactionsummary_blank.txt"))
+    print macros.testTempDir()
+    assert(macros.compare_files(macros.testTempDir() + "/txSummary_0.txt",
+                                macros.testDataDir() + "/frontend/common/transactionsummary_blank.txt"))
+
+def test_logout2(setup):
+    rc = 0
+
+    combined = macros.getIoList(macros.testDataDir() + '/frontend/logout/logout2_input.txt',
+                                macros.testDataDir() + '/frontend/logout/logout2_output.txt')
+
+    child = macros.spawnFrontend()
+
+    for i,o in combined:
+        rc |= macros.run_test(child,i,o)
+
+    child.close()
+
+    assert(rc == 0)
+
+def test_logout2_txSummary_0():
+    assert(macros.compare_files(macros.testTempDir() + "/txSummary_0.txt",
+                                macros.testDataDir() + "/frontend/common/transactionsummary_blank.txt"))
+
+def test_logout2_txSummary_1():
+    assert(macros.compare_files(macros.testTempDir() + "/txSummary_1.txt",
+                                macros.testDataDir() + "/frontend/common/transactionsummary_blank.txt"))
