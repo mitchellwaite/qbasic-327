@@ -4,3 +4,4 @@ deposit
 withdraw
 transfer
 logout
+quit

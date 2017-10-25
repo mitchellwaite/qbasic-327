@@ -10,3 +10,4 @@ logout
 login
 machine
 logout
+quit
