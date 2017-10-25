@@ -38,9 +38,9 @@ print "Test Suite Statistics:\n"
 print "Pass: {}\nFail: {}\nTotal Tests: {}\nTime: {}s\n".format(suPass,suFail,suTotal,suTime)
 print "Test Report:"
 
-print "{:->21}|{:->32}|{:->6}|{:->15}".format("","","","")
-print "{:^20} | {:^30} | {:^4} | {}".format("File", "Test", "Line", "Pass/Fail")
-print "{:->21}|{:->32}|{:->6}|{:->15}".format("","","","")
+print "{:->21}|{:->32}|{:->6}|{:->25}".format("","","","")
+print "{: <20} | {: <30} | {: <4} | {}".format("File", "Test", "Line", "Pass/Fail")
+print "{:->21}|{:->32}|{:->6}|{:->25}".format("","","","")
 
 for result in resultTable:
-    print "{:<20} | {:<30} | {:<4} | {}".format(result["file"],result["test"], result["line"], result["error"])
+    print "{:<20} | {:<30} | {:<4} | {}".format(result["file"],result["test"], result["line"], (result["error"][:25] + '..') if len(result["error"]) > 25 else result["error"])
