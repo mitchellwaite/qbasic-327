@@ -134,7 +134,8 @@ def validateNewDeleted(action, accountNumber, accountsPendingCreation, accountsP
 # @return string -> The account number
 def getAcctNumber(s = ""):
     # Promt for the account number
-    accountNumber = raw_input(messages.getMessage("pleaseEnter","account number" + s) + "> ")
+    print messages.getMessage("pleaseEnter","account number" + s)
+    accountNumber = raw_input("> ")
 
     # Check it meets the requirements. If it doesn't, print an error and bail out
     if len(accountNumber) != 7  or accountNumber.startswith(" ") or accountNumber.endswith(" ") or accountNumber.startswith("0") or not qbUtil.isInt(accountNumber):
@@ -158,7 +159,8 @@ def getAcctNameNumber():
         return False, None, None
 
     # Get the account name
-    accountName = raw_input(messages.getMessage("pleaseEnter","account name") + "> ")
+    print messages.getMessage("pleaseEnter","account name")
+    accountName = raw_input("> ")
 
     # Check it meets the requirements. If it doesn't, print an error and bail out
     if len(accountName) < 3 or len(accountName) > 30 or accountName.startswith(" ") or accountName.endswith(" "):
@@ -178,7 +180,8 @@ def getAcctNameNumber():
 def getDollarAmount(sessionType):
 
     # Prompt for an amount of cents from the user
-    centsAmount = raw_input(messages.getMessage("pleaseEnter","an amount of money in cents") + "> ")
+    print messages.getMessage("pleaseEnter","an amount of money in cents")
+    centsAmount = raw_input("> ")
 
     # Check to make sure it's an int. If not, print an error bail out of the function
     if not qbUtil.isInt(centsAmount):

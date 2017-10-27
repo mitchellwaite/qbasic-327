@@ -70,7 +70,7 @@ def main():
     while mainLoop:
         try:
             # Get an input command from the user
-            inputArgs = raw_input("{}> ".format(sessionType))
+            inputArgs = raw_input("> ")
             command = inputArgs
 
             if command == "quit":
