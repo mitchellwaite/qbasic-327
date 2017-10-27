@@ -22,6 +22,18 @@ withdraw
 1234567
 1
 withdraw
+2345678
+100001
+withdraw
+2345678
+90000
+withdraw
+2345678
+10001
+withdraw
+2345678
+10000
+withdraw
 abc
 withdraw
 7654321
@@ -38,4 +50,3 @@ withdraw
 1234567
 abc
 logout
-quit

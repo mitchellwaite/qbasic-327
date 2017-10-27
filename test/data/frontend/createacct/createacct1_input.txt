@@ -24,4 +24,3 @@ transfer
 3456789
 99999999
 logout
-quit

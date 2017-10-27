@@ -13,4 +13,3 @@ createacct
 3456789
 SpaceEnds
 logout
-quit

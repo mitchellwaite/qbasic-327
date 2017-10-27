@@ -1,4 +1,3 @@
 login
 agent
 logout
-quit

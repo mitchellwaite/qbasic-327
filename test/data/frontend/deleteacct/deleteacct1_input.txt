@@ -18,4 +18,3 @@ transfer
 1234567
 99999999
 logout
-quit

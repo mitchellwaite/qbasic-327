@@ -10,4 +10,3 @@ deposit
 1234567
 100000
 logout
-quit

@@ -26,4 +26,3 @@ deposit
 1234567
 abc
 logout
-quit

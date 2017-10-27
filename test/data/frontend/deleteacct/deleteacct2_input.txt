@@ -2,4 +2,3 @@ login
 machine
 deleteacct
 logout
-quit

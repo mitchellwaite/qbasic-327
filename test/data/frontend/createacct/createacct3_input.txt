@@ -13,4 +13,3 @@ createacct
 createacct
 123!@#
 logout
-quit

@@ -21,11 +21,10 @@ deleteacct
  SpaceBegin
 deleteacct
 1234567
-SpaceEnd 
+SpaceEnd
 deleteacct
 1234567
 Test
 deleteacct
 1234567
 logout
-quit

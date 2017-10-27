@@ -22,4 +22,3 @@ withdraw
 2345678
 100000
 logout
-quit

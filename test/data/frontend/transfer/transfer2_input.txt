@@ -24,4 +24,3 @@ transfer
 2345678
 -1.00
 logout
-quit

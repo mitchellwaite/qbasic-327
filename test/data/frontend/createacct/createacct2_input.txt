@@ -2,4 +2,3 @@ login
 machine
 createacct
 logout
-quit
