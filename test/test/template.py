@@ -1,3 +1,4 @@
+# Template for a test, nothing to see here
 import pytest
 import pexpect
 import os
@@ -20,6 +21,7 @@ def test_logout1(setup):
 
     child.close()
 
+    # Check to see that we have passed all tests
     assert(rc == 0)
 
 def test_logout1_txSummary():
