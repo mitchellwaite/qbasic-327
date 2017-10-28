@@ -354,6 +354,10 @@ def doTransfer(sessionType, validAccounts, accountsPendingCreation, accountsPend
         # Get the acct name and number
         result, accountNumberFrom = getAcctNumber(" to transfer from")
 
+        if False == result:
+            # There was an error getting the account number from the user
+            return False, None, None, None
+
         # Validate that the account isn't a new or deleted account
         if False == validateNewDeleted("transfer",accountNumberFrom,accountsPendingCreation, accountsPendingDeletion):
             return False, None, None, None
@@ -365,6 +369,10 @@ def doTransfer(sessionType, validAccounts, accountsPendingCreation, accountsPend
 
         # Get the acct name and number
         result, accountNumberTo = getAcctNumber(" to transfer to")
+
+        if False == result:
+            # There was an error getting the account number from the user
+            return False, None, None, None
 
         # Validate that the account isn't a new or deleted account
         if False == validateNewDeleted("transfer",accountNumberTo,accountsPendingCreation, accountsPendingDeletion):

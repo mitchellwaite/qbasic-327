@@ -3,15 +3,22 @@ Logged in as agent.
 Please enter account number to transfer from
 Please enter account number to transfer to
 Please enter an amount of money in cents
-Invalid monetary amount: $1000000.00.
+Invalid monetary amount: $1000000.00
+Please enter account number to transfer from
+Please enter account number to transfer to
+Please enter an amount of money in cents
+Invalid monetary amount: 100000.000
 Successfully logged out.
 Please enter session type
 Logged in as machine.
 Please enter account number to transfer from
 Please enter account number to transfer to
 Please enter an amount of money in cents
-Invalid monetary amount: 1000.01
+Insufficient permissions to execute transactions over $1000.
 Please enter account number to transfer from
+Invalid account number: abc
+Please enter account number to transfer from
+Please enter account number to transfer to
 Invalid account number: abc
 Please enter account number to transfer from
 Could not complete transaction. Account 7654321 doesn't exist.
@@ -22,5 +29,5 @@ Invalid monetary amount: $0.00
 Please enter account number to transfer from
 Please enter account number to transfer to
 Please enter an amount of money in cents
-Invalid monetary amount: $-1.00
+Invalid monetary amount: $-.01
 Successfully logged out.

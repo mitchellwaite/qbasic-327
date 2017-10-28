@@ -45,5 +45,10 @@ def test_transfer2(setup):
 
     assert(rc == 0)
 
-def test_transfer2_txSummary():
-    macros.assertEmptyTestDir()
+def test_transfer2_txSummary_0():
+    assert(macros.compare_files(macros.testTempDir() + "/txSummary_0.txt",
+                                macros.testDataDir() + "/frontend/common/transactionsummary_blank.txt"))
+
+def test_transfer2_txSummary_1():
+    assert(macros.compare_files(macros.testTempDir() + "/txSummary_1.txt",
+                                macros.testDataDir() + "/frontend/common/transactionsummary_blank.txt"))
