@@ -45,6 +45,10 @@ def test_withdraw2(setup):
 
     assert(rc == 0)
 
-def test_withdraw2_txSummary():
+def test_withdraw2_txSummary_0():
     assert(macros.compare_files(macros.testTempDir() + "/txSummary_0.txt",
-                                macros.testDataDir() + "/frontend/withdraw/withdraw2_transaction_0.txt"))
+                                macros.testDataDir() + "/frontend/common/transactionsummary_blank.txt"))
+
+def test_withdraw2_txSummary():
+    assert(macros.compare_files(macros.testTempDir() + "/txSummary_1.txt",
+                                macros.testDataDir() + "/frontend/withdraw/withdraw2_transaction.txt"))

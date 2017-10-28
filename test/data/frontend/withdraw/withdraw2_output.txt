@@ -45,7 +45,7 @@ Please enter an amount of money in cents
 Invalid monetary amount: $-1.00
 Please enter account number
 Please enter an amount of money in cents
-Invalid withdrawal amount: 1.11. You must enter the amount in an integral quantity of cents.
+Invalid monetary amount: 1.11
 Please enter account number
 Please enter an amount of money in cents
 Invalid monetary amount: abc

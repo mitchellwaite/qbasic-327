@@ -2,16 +2,16 @@ Please enter session type
 Logged in as agent.
 Please enter account number
 Please enter an amount of money in cents
-$999999.99 has been successfully withdrawn from account #1234567.
+Successfully withdrew $999999.99 from account #1234567
 Please enter account number
 Please enter an amount of money in cents
-$999999.99 has been successfully withdrawn from account #1234567.
+Successfully withdrew $999999.99 from account #1234567
 Please enter account number
 Please enter an amount of money in cents
-$999999.99 has been successfully withdrawn from account #2345678.
+Successfully withdrew $999999.99 from account #2345678
 Please enter account number
 Please enter an amount of money in cents
-$999999.99 has been successfully withdrawn from account #2345678.
+Successfully withdrew $999999.99 from account #2345678
 Successfully logged out.
 Please enter session type
 Logged in as machine.
