@@ -193,11 +193,11 @@ def getDollarAmount(sessionType):
 
     # Check the amount to make sure its within the limit for the specified session
     # type. If it isn't print an error and bail out of the function
-    if centsAmountInt <= 0 or (sessionType == session.privilegedSessionType and centsAmount > 99999999):
-        print messages.getMessage("invalidCustom",["monetary amount", qbUtil.centsToDollars(centsAmount)])
-        return False, None
-    elif centsAmountInt > 100000:
+    if sessionType != session.privilegedSessionType and centsAmountInt > 100000:
         print messages.getMessage("mustBeAgent","execute transactions over $1000")
+        return False, None
+    elif centsAmountInt <= 0 or centsAmountInt > 99999999:
+        print messages.getMessage("invalidCustom",["monetary amount", qbUtil.centsToDollars(centsAmount)])
         return False, None
 
     # Return the amount of cents
