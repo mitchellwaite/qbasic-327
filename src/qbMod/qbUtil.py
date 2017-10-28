@@ -17,4 +17,7 @@ def isInt(s):
 # @param cents -> string -> value to convert
 # @return string -> converted value
 def centsToDollars(cents):
+    if len(cents) < 3:
+        cents = cents.zfill(3)
+
     return "$" + cents[:-2] + "." + cents[-2:]

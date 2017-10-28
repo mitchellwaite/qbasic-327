@@ -185,7 +185,7 @@ def getDollarAmount(sessionType):
 
     # Check to make sure it's an int. If not, print an error bail out of the function
     if not qbUtil.isInt(centsAmount):
-        print messages.getMessage("invalidCustom",["monetary amount", qbUtil.centsToDollars(centsAmount)])
+        print messages.getMessage("invalidCustom",["monetary amount", centsAmount])
         return False, None
 
     # Convert the amount to an integer
