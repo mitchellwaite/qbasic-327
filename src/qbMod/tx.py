@@ -11,16 +11,16 @@ import qbUtil
 # Return values are the return from makeTx
 # All parameters are strings
 def makeTxCreate(number,name):
-    return makeTx("NEW",None,number,None,name)
+    return makeTx("NEW",None,None,number,name)
 
 def makeTxDelete(number,name):
-    return makeTx("DEL",None,number,None,name)
+    return makeTx("DEL",None,None,number,name)
 
 def makeTxWithdraw(number, amt):
-    return makeTx("WDR",amt,number,None,None)
+    return makeTx("WDR",amt,None,number,None)
 
 def makeTxDeposit(number, amt):
-    return makeTx("DEP",amt,number,None,None)
+    return makeTx("DEP",amt,None,number,None)
 
 def makeTxTransfer(numberFrom, numberTo, amt):
     return makeTx("XFR",amt,numberFrom,numberTo,None)
@@ -36,12 +36,12 @@ def makeTxTransfer(numberFrom, numberTo, amt):
 # @return dictionary -> dictionary containing a representation of the transaction
 def makeTx(code, amt, fromAcct, toAcct, name):
     intAmt = "000"
-    intTo = "0000000"
+    intFrom = "0000000"
     intName = "***"
 
     # The to account is optional. If it's provided, set the field
-    if toAcct is not None:
-        intTo = str(toAcct)
+    if fromAcct is not None:
+        intFrom = str(fromAcct)
 
     # Name is optional, if provided set the field
     if name is not None:
@@ -55,8 +55,8 @@ def makeTx(code, amt, fromAcct, toAcct, name):
     transaction = {
         "code" : code,
         "amount" : intAmt,
-        "from" : fromAcct,
-        "to" : intTo,
+        "from" : intFrom,
+        "to" : toAcct,
         "name" : intName
     }
 
@@ -101,7 +101,7 @@ def writeTransactionList(txList, txSummaryOutputDir):
 
     # Write out the transaction list, line by line
     for tx in txList:
-        outFile.write("{} {} {} {} {}\n".format(tx["code"], tx["amount"], tx["from"], tx["to"], tx["name"]))
+        outFile.write("{} {} {} {} {}\n".format(tx["code"], tx["to"], tx["amount"], tx["from"], tx["name"]))
 
     #Close the file
     outFile.close()
