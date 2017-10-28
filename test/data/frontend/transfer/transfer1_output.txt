@@ -1,14 +1,14 @@
-Please enter the session type.
-Logged in as Agent.
-Please enter an account number to transfer from.
-Please enter an account number to transfer to.
-Please enter the amount you want to transfer.
-$999999.99 has been successfully transferred from account #1234567 to #2345678.
-You have been successfully logged out from Agent.
-Please enter the session type.
-Logged in as Machine.
-Please enter an account number to transfer from.
-Please enter an account number to transfer to.
-Please enter the amount you want to transfer.
-$1000.00 has been successfully transferred from account #1234567 to #2345678.
-You have been successfully logged out from Machine.
+Please enter session type
+Logged in as agent.
+Please enter account number to transfer from
+Please enter account number to transfer to
+Please enter an amount of money in cents
+Successfully transferred $999999.99 to account #2345678.
+Successfully logged out.
+Please enter session type
+Logged in as machine.
+Please enter account number to transfer from
+Please enter account number to transfer to
+Please enter an amount of money in cents
+Successfully transferred $1000.00 to account #2345678.
+Successfully logged out.

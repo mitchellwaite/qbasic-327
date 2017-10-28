@@ -4,6 +4,7 @@ deleteacct
 0123456
 deleteacct
 3456789
+test
 deleteacct
 123456
 deleteacct
@@ -12,7 +13,7 @@ deleteacct
 abc
 deleteacct
 1234567
-Tes
+Te
 deleteacct
 1234567
 TesterTesterTesterTesterTesterT
@@ -21,10 +22,11 @@ deleteacct
  SpaceBegin
 deleteacct
 1234567
-SpaceEnd
+SpaceEnd 
 deleteacct
 1234567
 Test
 deleteacct
 1234567
+Test
 logout

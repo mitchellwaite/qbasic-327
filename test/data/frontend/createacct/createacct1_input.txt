@@ -11,16 +11,11 @@ createacct
 thirtycharacteraccname_abcdefg
 deposit
 3456789
-99999999
 withdraw
 3456789
-99999999
 transfer
 3456789
-2345678
-99999999
 transfer
 1234567
 3456789
-99999999
 logout

@@ -20,7 +20,7 @@ message = {
     "enterSessType": "You must include a session type with the login command",
     "invalidSess": "Invalid session type: {}",
     "invalidCustom": "Invalid {}: {}",
-    "mustBeAgent": "Insufficient permissions. You must be an agent to {}.",
+    "mustBeAgent": "Insufficient permissions to {}.",
     "loggedIn": "Logged in as {}.",
     "alreadyLoggedIn": "You are already logged in.",
     "alreadyLoggedOut": "You are already logged out.",

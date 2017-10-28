@@ -1,4 +1,4 @@
-Please enter the session type.
-Logged in as Machine.
+Please enter session type
+Logged in as machine.
 You are already logged in.
-You are logged out from Machine.
+Successfully logged out.

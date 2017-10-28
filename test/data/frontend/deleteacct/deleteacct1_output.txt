@@ -1,20 +1,15 @@
-Please enter the session type.
-Logged in as Agent.
-Please enter an account number to delete.
-Please enter an account name to delete.
-Account #1234567 with name Test has been successfully deleted.
-Please enter an account number to deposit into.
-Please enter the amount you want to deposit.
-Unable to deposit: account number #1234567 is pending deletion.
-Please enter an account number to withdraw from.
-Please enter the amount you want to withdraw.
-Unable to withdraw: account number #1234567 is pending deletion.
-Please enter an account number to transfer from.
-Please enter an account number to transfer to.
-Please enter the amount you want to transfer.
-Unable to transfer: account number #1234567 is pending deletion.
-Please enter an account number to transfer from.
-Please enter an account number to transfer to.
-Please enter the amount you want to transfer.
-Unable to transfer: account number #1234567 is pending deletion.
-You have been successfully logged out from Agent.
+Please enter session type
+Logged in as agent.
+Please enter account number
+Please enter account name
+Successfully deleted account #1234567.
+Please enter account number
+Could not deposit. Account 1234567 is pending deletion.
+Please enter account number
+Could not withdraw. Account 1234567 is pending deletion.
+Please enter account number to transfer from
+Could not transfer. Account 1234567 is pending deletion.
+Please enter account number to transfer from
+Please enter account number to transfer to
+Could not transfer. Account 1234567 is pending deletion.
+Successfully logged out.

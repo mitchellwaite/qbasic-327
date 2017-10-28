@@ -1,4 +1,4 @@
-Please enter the session type.
-Logged in as Machine.
-You do not have permissions to delete accounts.
-You have been successfully logged out from Machine.
+Please enter session type
+Logged in as machine.
+Insufficient permissions to delete an account.
+Successfully logged out.

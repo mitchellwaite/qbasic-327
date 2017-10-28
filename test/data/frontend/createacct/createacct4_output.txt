@@ -1,15 +1,15 @@
-Please enter the session type.
-Logged in as Agent.
-Please enter an account number to create.
-Please enter an account name to create.
-Invalid account name: Te.
-Please enter an account number to create.
-Please enter an account name to create.
+Please enter session type
+Logged in as agent.
+Please enter account number
+Please enter account name
+Invalid account name: Te
+Please enter account number
+Please enter account name
 Invalid account name: TesterTesterTesterTesterTesterT
-Please enter an account number to create.
-Please enter an account name to create.
-Invalid account name:  SpaceBegins
-Please enter an account number to create.
-Please enter an account name to create.
-Invalid account name: SpaceEnds
-You have been successfully logged out from Agent.
+Please enter account number
+Please enter account name
+Invalid account name:  SpaceBegin
+Please enter account number
+Please enter account name
+Invalid account name: SpaceEnds 
+Successfully logged out.

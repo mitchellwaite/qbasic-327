@@ -83,7 +83,7 @@ def run_test(child, input, output):
 
     # this is the actual output from QBasic that we want
     spl = child.before.splitlines()
-    print spl
+    #print spl
     actualOutput = spl[len(spl) - 1] #< right here.
 
     if output != actualOutput:

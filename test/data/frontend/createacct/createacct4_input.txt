@@ -11,5 +11,5 @@ createacct
  SpaceBegin
 createacct
 3456789
-SpaceEnds
+SpaceEnds 
 logout
