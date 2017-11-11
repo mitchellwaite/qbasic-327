@@ -6,7 +6,7 @@ import difflib
 
 # Returns the location of the main.py for the frontend
 def mainPyLocation():
-   return testHomeDir() + "/../src/main.py"
+   return testHomeDir() + "/../src/frontend/main.py"
 
 # Returns the path to the test "home" directory... essentially qbasic-327/test
 def testHomeDir():
