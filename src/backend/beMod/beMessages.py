@@ -3,8 +3,16 @@ import types
 # List of message format strings, used for calls to the getMessage function
 message = {
     "test": "this is a test",
+    "masterAccountsLoc": "Loading old master accounts file from: {}",
+    "mergedSummLoc": "Loading merged transaction summary from: {}",
+    "outValidAccLoc": "Writing valid accounts list to: {}",
+    "outMasterAccLoc": "Writing new master accounts file to: {}",
     "notImplemented": "{} has not been implemented yet.",
     "error": "Error returned from {} : {}",
+    "invalidCustom": "Invalid {}: {}",
+    "fatalError": "Fatal error returned from {} : {}",
+    "fatalErrorLineLength": "Fatal error: Line {} of master accounts file is greater than 47 characters",
+    "fatalErrorFieldCount": "Fatal error: The following line of the {} does not contain all required fields: \"{}\"",
     "msgErr": "message not found"
     }
 
