@@ -1,26 +1,41 @@
-import messages
+import beMessages
 import beUtil
 
 def loadMasterAccountsFile(filePath):
     masterAccountsArr = beUtil.loadFileToArray(filePath)
     masterAccountsDict = {}
 
-    for i in range(0,len(masterAccountsArr));
+    for i in range(0,len(masterAccountsArr)):
         if len(masterAccountsArr[i]) > 47:
-            print messages.getMessage("fatalErrorLineLength",i)
+            print beMessages.getMessage("fatalErrorLineLength",i)
             raise Exception
 
         accountNumber, accountDetails = parseMasterAccountsFileLine(masterAccountsArr[i])
 
-        masterAccountsDict[accountNumber] = accountDetails
+        if accountNumber not in masterAccountsDict:
+            masterAccountsDict[accountNumber] = accountDetails
+        else:
+            print beMessages.getMessage("duplicateAccountMAF",accountNumber)
+            raise Exception
 
     return masterAccountsDict
 
 def loadTransactionSummaryFile(filePath):
     rawMtsfArr = beUtil.loadFileToArray(filePath)
+    outMtsfArr = []
 
     for i in range(0,len(rawMtsfArr)):
+        transaction = parseTransactionSummaryLine(rawMtsfArr[i])
 
+        if transaction != None:
+            outMtsfArr.append(transaction)
+        else:
+            if i < len(rawMtsfArr) - 1:
+                # We've encountered a transaction file that has lines after the last one in the files
+                print beMessages.getMessage("fatalError",["loadTSF","EOS isn't the last transaction in the file."])
+                raise Exception
+
+    return outMtsfArr
 
 def parseMasterAccountsFileLine(line):
     accountNumber = ""
@@ -32,7 +47,7 @@ def parseMasterAccountsFileLine(line):
 
     # There are a minimum of 3 fields in the line
     if len(lineArr) < 3:
-        print messages.getMessage("fatalErrorFieldCount",["master accounts file"],line])
+        print beMessages.getMessage("fatalErrorFieldCount",["master accounts file",line])
         raise Exception
 
     # Account number should be the first field
@@ -54,7 +69,7 @@ def parseMasterAccountsFileLine(line):
     beUtil.validateAccountName(accountName, line)
 
     # At this point, we have a valid account. Return a dict representation
-    return accountNumber, { "name" : accountName, "balance" : accountBalance }
+    return accountNumber, { "name" : accountName, "balance" : int(accountBalance) }
 
 def parseTransactionSummaryLine(line):
     code = ""
@@ -68,35 +83,109 @@ def parseTransactionSummaryLine(line):
 
     # There are a minimum of 5 fields in the line
     if len(lineArr) < 5:
-        print messages.getMessage("fatalErrorFieldCount",["transaction summary file",line])
+        print beMessages.getMessage("fatalErrorFieldCount",["transaction summary file",line])
         raise Exception
 
     code = lineArr[0]
 
-    beUtil.validateTransactionCode(code, line)
+    if code == "EOS":
+        #End of session code. Indicate this by returning null so callers stop parsing the file!
+        return None
+
+    beUtil.validateTransactionCode(code)
 
     toAcct = lineArr[1]
 
-    beUtil.validateAccountNumber(toAcct, line)
+    beUtil.validateAccountNumber(toAcct)
 
     amount = lineArr[2]
 
-    beUtil.validateCentsAmount(amount, line)
+    beUtil.validateCentsAmount(amount, code)
 
     fromAcct = lineArr[3]
 
-    beUtil.validateAccountNumber(fromAcct, line, code)
+    beUtil.validateAccountNumber(fromAcct, code)
 
     name = " ".join(lineArr[4:])
 
-    beUtil.validateAccountName(name, line, code)
+    beUtil.validateAccountName(name, code)
 
     transaction = {
         "code" : code,
         "amount" : amount,
         "from" : fromAcct,
         "to" : toAcct,
-        "name" : name
+        "name" : name,
+        "str" : line
     }
 
     return transaction
+
+def runTransaction(tx, accountsDict):
+    if tx["code"] == "NEW":
+        if tx["to"] in accounsDict.keys:
+            # If the account exists, print an error
+            print beMessages.getMessage("accountExistsErr",[tx["str"],tx["to"]])
+        else:
+            # If the account doesn't exist, create it
+            accountsDict[tx["to"]] = {"name": tx["name"], "balance" : 0 }
+
+    else:
+        # For the rest of the transactions, the "to field must be specified"
+        if tx["to"] not in accountsDict.keys():
+            print beMessages.getMessage("accountDoesntExistErr",[tx["str"],tx["to"]])
+
+        else:
+
+            if tx["code"] ==  "DEL":
+                if tx["name"] != accountsDict[tx["to"]]["name"]:
+                    print beMessages.getMessage("accountNameMismatch",[tx["str"],tx["to"]])
+
+                elif accountsDict[tx["to"]]["balance"] != 0:
+                    print beMessages.getMessage("accountBalanceNotZero",[tx["str"],tx["to"]])
+
+                else:
+                    # Delete the account
+                    del accountsDict[tx["to"]]
+
+            elif tx["code"] == "WDR":
+                if accountsDict[tx["to"]]["balance"] - int(tx["amount"]) < 0:
+                    print beMessages.getMessage("accountBalanceLessThanZero",[tx["str"],tx["to"]])
+
+                else:
+                    accountsDict[tx["to"]] -= int(tx["amount"])
+
+            elif tx["code"] == "DEP":
+                if accountsDict[tx["to"]]["balance"] + int(tx["amount"]) > 99999999:
+                    print beMessages.getMessage("accountBalanceMoreThanMax",[tx["str"],tx["to"]])
+
+                else:
+                    accountsDict[tx["to"]] += int(tx["amount"])
+
+            elif tx["code"] == "XFR":
+                # Oh boy, special cases!
+                if tx["from"] not in accounsDict.keys:
+                    print beMessages.getMessage("accountDoesntExistErr",[tx["str"],tx["from"]])
+
+                elif accountsDict[tx["from"]]["balance"] - int(tx["amount"]) < 0:
+                    print beMessages.getMessage("accountBalanceLessThanZero",[tx["str"],tx["from"]])
+
+                elif accountsDict[tx["to"]]["balance"] + int(tx["amount"]) > 99999999:
+                    print beMessages.getMessage("accountBalanceMoreThanMax",[tx["str"],tx["to"]])
+
+                else:
+                    accountsDict[tx["from"]] -= int(tx["amount"])
+                    accountsDict[tx["to"]] += int(tx["amount"])
+
+    return accountsDict
+
+def writeMasterAccountsFile(outFile, accountsDict):
+    for account in sorted(accountsDict.keys()):
+        outString = "{} {} {}\n".format(account,
+                                        beUtil.zeroPad(str(accountsDict[account]["balance"])),
+                                        accountsDict[account]["name"])
+        outFile.write(outString)
+
+def writeValidAccountsList(outFile, accountsDict):
+    for account in sorted(accountsDict.keys()):
+        outFile.write(account + "\n")
