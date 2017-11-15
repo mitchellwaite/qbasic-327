@@ -49,15 +49,20 @@ def main():
         print beMessages.getMessage("fatalError", str(e))
         return -1
 
+    # Check to make sure the old master accounts file actually exists. If not,
+    # print an error and return
     if not os.path.exists(masterAccountsFilePath):
         print beMessages.getMessage("fatalError",["main","Old master accounts file not found"])
         return -1
 
+    # Check to make sure the merged transaction summary file actually exists.
+    # If not, print an error and return
     if not os.path.exists(mergedTransactionSummaryFilePath):
         print beMessages.getMessage("fatalError",["main","Merged transaction summary file not found"])
         return -1
 
-    #Open the new valid accounts list and master accounts file for writing
+    # Open the new valid accounts list and master accounts file for writing.
+    # If there's a problem, an exception will be thrown and the backend will die.
     outMasterAccountsFile = open(outputMasterAccountsFilePath,'w')
     outValidAccountsFile = open(outputValidAccountsFilePath, 'w')
 
@@ -69,7 +74,7 @@ def main():
 
     # In order, run each transaction against the accounts dictionary, updating
     # it if the transaction was successful. We're assuming that the previous
-    # code has checked for well formed data at this point
+    # loading functions have checked for well formed data
     for tx in transactionList:
         accountsDict = beProc.runTransaction(tx, accountsDict)
 
@@ -79,8 +84,12 @@ def main():
     # Write the new master accounts file
     beProc.writeMasterAccountsFile(outMasterAccountsFile, accountsDict)
 
+    # Close both files
     outValidAccountsFile.close()
     outMasterAccountsFile.close()
+
+    # Print a finished message.
+    print "QBasic backend processing finished.\n"
 
 if __name__ == "__main__":
     main()
