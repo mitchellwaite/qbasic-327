@@ -76,8 +76,14 @@ def validateCentsAmount(centsAmount, txCode=None):
                 raise Exception
     # For other kinds of transactions...
     else:
-        # Check that the string represents an integer, and it is between 3 and 10 digits
-        if not isInt(centsAmount) or len(centsAmount)  < 3 or len(centsAmount)  > 10:
+        # Check that the string represents an integer, and it is between 3 and 8 digits
+        if not isInt(centsAmount) or len(centsAmount)  < 3 or len(centsAmount)  > 8:
+            print beMessages.getMessage("invalidCustom",["cents amount",centsAmount])
+            raise Exception
+
+        # At this point we know centsAmount is an integer. Check that it's
+        # within the valid range.
+        if int(centsAmount) < 0 or int(centsAmount) > 99999999:
             print beMessages.getMessage("invalidCustom",["cents amount",centsAmount])
             raise Exception
 
