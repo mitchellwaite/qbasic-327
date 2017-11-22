@@ -1,85 +1,27 @@
 import pytest
 import pexpect
 import os
+import sys
 import macros
 
-# Pytest fixture, handles the initial conditions for each test.
-# Clears the temporary directory, removing old summary files
-@pytest.fixture
-def setup():
-   macros.removeTempDirs()
+# Allows us to import the functions from
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..' , 'src', 'backend'))
+from beMod import *
 
-# Tests the withdraw functionality, using withdraw1_input/output text files
-#
-# @param setup : pytest fixture at the top of the file, clears temp directory
-#
-# Returns: 0 for no error
-# Throws:  AssertionError if any input/output tuple does not match what's expected
-def test_withdraw1(setup):
-    rc = 0
 
-    # Read the inputs and outputs in to a list of tuples
-    combined = macros.getIoList(macros.testDataDir() + '/frontend/withdraw/withdraw1_input.txt',
-                                macros.testDataDir() + '/frontend/withdraw/withdraw1_output.txt')
+@pytest.mark.parametrize("inDict,outDict,tx", [
+    ({}, {'1234567': {'balance': 0, 'name': 'test'}},  {"code" : "NEW", "amount" : "000", "from" : "0000000", "to" : "1234567", "name" : "test", "str" : "NEW 1234567 000 0000000 test" }),
+    ({}, {},  {"code" : "DEP", "amount" : "000", "from" : "0000000", "to" : "1234567", "name" : "test", "str" : "DEP 1234567 123 0000000 ***" }),
+    ({'1234567': {'balance': 123456, 'name': 'test'}}, {'1234567': {'balance': 123456, 'name': 'test'}},  {"code" : "NEW", "amount" : "000", "from" : "0000000", "to" : "1234567", "name" : "test", "str" : "NEW 1234567 000 0000000 test" })
+])
+def test_runTransaction_new(inDict, outDict, tx):
+    tmpOutDict = beProc.runTransaction(tx,inDict)
+    assert outDict == tmpOutDict
 
-    # Spawn the Qbasic frontend
-    child = macros.spawnFrontend()
-
-    # Send each input, verify the response against the expected output
-    # RC nonzero indicates a failed test
-    # Send each input, verify the response against the expected output
-    # RC nonzero indicates a failed test
-    for i,o in combined:
-        rc |= macros.run_test(child,i,o)
-
-    # Close QBasic
-    child.close()
-
-    # Check to see that we have passed all tests
-    assert(rc == 0)
-
-# Verifies that the transaction summary from the first session of withdraw1 matches the one provided
-def test_withdraw1_txSummary_0():
-    assert(macros.compare_files(macros.testTempDir() + "/txSummary_0.txt",
-                                macros.testDataDir() + "/frontend/withdraw/withdraw1_transaction_0.txt"))
-
-# Verifies that the transaction summary from the second session of withdraw1 matches the one provided
-def test_withdraw1_txSummary_1():
-    assert(macros.compare_files(macros.testTempDir() + "/txSummary_1.txt",
-                                macros.testDataDir() + "/frontend/withdraw/withdraw1_transaction_1.txt"))
-
-# Tests the withdraw functionality, using withdraw2_input/output text files
-#
-# @param setup : pytest fixture at the top of the file, clears temp directory
-#
-# Returns: 0 for no error
-# Throws:  AssertionError if any input/output tuple does not match what's expected
-def test_withdraw2(setup):
-    rc = 0
-
-    combined = macros.getIoList(macros.testDataDir() + '/frontend/withdraw/withdraw2_input.txt',
-                                macros.testDataDir() + '/frontend/withdraw/withdraw2_output.txt')
-
-    # Spawn the qbasic frontend
-    child = macros.spawnFrontend()
-
-    # Send each input, verify the response against the expected output
-    # RC nonzero indicates a failed test
-    for i,o in combined:
-        rc |= macros.run_test(child,i,o)
-
-    # Close QBasic
-    child.close()
-
-    # Check to see that we have passed all tests
-    assert(rc == 0)
-
-# Verifies that the transaction summary from the first session of withdraw2 is blank
-def test_withdraw2_txSummary_0():
-    assert(macros.compare_files(macros.testTempDir() + "/txSummary_0.txt",
-                                macros.testDataDir() + "/frontend/common/transactionsummary_blank.txt"))
-
-# Verifies that the transaction summary from the second session of withdraw2 matches the one provided
-def test_withdraw2_txSummary_1():
-    assert(macros.compare_files(macros.testTempDir() + "/txSummary_1.txt",
-                                macros.testDataDir() + "/frontend/withdraw/withdraw2_transaction.txt"))
+@pytest.mark.parametrize("inDict,outDict,tx", [
+    ({'1234567': {'balance': 123456, 'name': 'test'}}, {'1234567': {'balance': 122222, 'name': 'test'}},  {"code" : "WDR", "amount" : "1234", "from" : "0000000", "to" : "1234567", "name" : "test", "str" : "NEW 1234567 000 0000000 test" }),
+    ({'1234567': {'balance': 123456, 'name': 'test'}}, {'1234567': {'balance': 123456, 'name': 'test'}},  {"code" : "WDR", "amount" : "1234567", "from" : "0000000", "to" : "1234567", "name" : "test", "str" : "NEW 1234567 000 0000000 test" })
+])
+def test_runTransaction_wdr(inDict, outDict, tx):
+    tmpOutDict = beProc.runTransaction(tx,inDict)
+    assert outDict == tmpOutDict
