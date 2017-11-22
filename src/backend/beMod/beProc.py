@@ -257,7 +257,7 @@ def runTransaction(tx, accountsDict):
 
                 else:
                     # Subtract the amount of money withdrawn from the account
-                    accountsDict[tx["to"]] -= int(tx["amount"])
+                    accountsDict[tx["to"]]["balance"] -= int(tx["amount"])
 
 
             elif tx["code"] == "DEP":
@@ -268,7 +268,7 @@ def runTransaction(tx, accountsDict):
 
                 else:
                     # Add the amount of money depsited to the account balance
-                    accountsDict[tx["to"]] += int(tx["amount"])
+                    accountsDict[tx["to"]]["balance"] += int(tx["amount"])
 
             elif tx["code"] == "XFR":
                 # Oh boy, special cases!
@@ -289,8 +289,8 @@ def runTransaction(tx, accountsDict):
                 else:
                     # If the transfer is kosher, subtract the amount from
                     # the "from" account and add it to the "to" account
-                    accountsDict[tx["from"]] -= int(tx["amount"])
-                    accountsDict[tx["to"]] += int(tx["amount"])
+                    accountsDict[tx["from"]]["balance"] -= int(tx["amount"])
+                    accountsDict[tx["to"]]["balance"] += int(tx["amount"])
 
     return accountsDict
 
