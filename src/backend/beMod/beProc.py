@@ -221,7 +221,7 @@ def runTransaction(tx, accountsDict):
     if tx["code"] == "NEW":
         # !SPECIAL CASE! New account is the only one that throws an error
         # if the account already exists
-        if tx["to"] in accountsDict.keys:
+        if tx["to"] in accountsDict.keys():
             # If the account exists, print an error
             print beMessages.getMessage("accountExistsErr",[tx["str"],tx["to"]])
         else:
@@ -231,7 +231,7 @@ def runTransaction(tx, accountsDict):
     else:
         # For the rest of the transactions, the "to" account must be specified
         # and present in the master accounts file
-        if tx["to"] not in accountsDict.keys():
+        if tx["to"] not in accountsDict.keys()():
             print beMessages.getMessage("accountDoesntExistErr",[tx["str"],tx["to"]])
 
         else:
