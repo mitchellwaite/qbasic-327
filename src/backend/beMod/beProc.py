@@ -231,7 +231,7 @@ def runTransaction(tx, accountsDict):
     else:
         # For the rest of the transactions, the "to" account must be specified
         # and present in the master accounts file
-        if tx["to"] not in accountsDict.keys()():
+        if tx["to"] not in accountsDict.keys():
             print beMessages.getMessage("accountDoesntExistErr",[tx["str"],tx["to"]])
 
         else:
