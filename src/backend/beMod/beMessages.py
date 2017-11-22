@@ -14,12 +14,12 @@ message = {
     "fatalError": "Fatal error returned from {} : {}",
     "fatalErrorLineLength": "Fatal error: Line {} of master accounts file is greater than 47 characters",
     "fatalErrorFieldCount": "Fatal error: The following line of the {} does not contain all required fields: \"{}\"",
-    "accountExistsErr": "Couldn't execute transaction {}. Account {} already exists.",
-    "accountDoesntExistErr": "Couldn't execute transaction {}. Account {} does not exist.",
-    "accountNameMismatch": "Couldn't execute transaction {}. Account name does not match.",
-    "accountBalanceNotZero": "Couldn't execute transaction {}. Balance of account {} is not zero.",
+    "accountExistsErr": "Couldn't execute transaction ({}). Account {} already exists.",
+    "accountDoesntExistErr": "Couldn't execute transaction ({}). Account {} does not exist.",
+    "accountNameMismatch": "Couldn't execute transaction ({}). Account name does not match.",
+    "accountBalanceNotZero": "Couldn't execute transaction ({}). Balance of account {} is not zero.",
     "accountBalanceLessThanZero": "Couldn't execute transaction ({}). New balance of account {} would be negative.",
-    "accountBalanceMoreThanMax": "Couldn't execute transaction {}. New balance of account {} would be greater than the maximum allowed.",
+    "accountBalanceMoreThanMax": "Couldn't execute transaction ({}). New balance of account {} would be greater than the maximum allowed.",
     "msgErr": "message not found"
     }
 
