@@ -45,8 +45,8 @@ def test_runTransaction_new(inDict, outDict, tx):
 # 1           1234567 123456 test         WDR 1234567 1234 0000000 test       T1
 # 1           1234567 123456 test         WDR 1234567 1234567 0000000 test    T2
 @pytest.mark.parametrize("inDict,outDict,tx", [
-    ({'1234567': {'balance': 123456, 'name': 'test'}}, {'1234567': {'balance': 122222, 'name': 'test'}},  {"code" : "WDR", "amount" : "1234", "from" : "0000000", "to" : "1234567", "name" : "test", "str" : "NEW 1234567 000 0000000 test" }),
-    ({'1234567': {'balance': 123456, 'name': 'test'}}, {'1234567': {'balance': 123456, 'name': 'test'}},  {"code" : "WDR", "amount" : "1234567", "from" : "0000000", "to" : "1234567", "name" : "test", "str" : "NEW 1234567 000 0000000 test" })
+    ({'1234567': {'balance': 123456, 'name': 'test'}}, {'1234567': {'balance': 122222, 'name': 'test'}},  {"code" : "WDR", "amount" : "1234", "from" : "0000000", "to" : "1234567", "name" : "test", "str" : "WDR 1234567 1234 0000000 ***" }),
+    ({'1234567': {'balance': 123456, 'name': 'test'}}, {'1234567': {'balance': 123456, 'name': 'test'}},  {"code" : "WDR", "amount" : "1234567", "from" : "0000000", "to" : "1234567", "name" : "test", "str" : "WDR 1234567 1234567 0000000 ***" })
 ])
 def test_runTransaction_wdr(inDict, outDict, tx):
     tmpOutDict = beProc.runTransaction(tx,inDict)
