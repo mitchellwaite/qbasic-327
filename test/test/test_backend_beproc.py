@@ -30,9 +30,9 @@ from beMod import *
       {"code" : "NEW", "amount" : "000", "from" : "0000000", "to" : "1234567", "name" : "test", "str" : "NEW 1234567 000 0000000 test" },
       "" ),
 
-    ( {},
-      {},
-      {"code" : "DEP", "amount" : "000", "from" : "0000000", "to" : "1234567", "name" : "test", "str" : "DEP 1234567 123 0000000 ***" },
+    ( {'1234567': {'balance': 123456, 'name': 'test'}},
+      {'1234567': {'balance': 123457, 'name': 'test'}},
+      {"code" : "DEP", "amount" : "001", "from" : "0000000", "to" : "1234567", "name" : "test", "str" : "DEP 1234567 123 0000000 ***" },
       "" ),
 
     ( {'1234567': {'balance': 123456, 'name': 'test'}},
