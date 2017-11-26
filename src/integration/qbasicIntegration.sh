@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Create output directories. If they exist, ignore the error from mkdir
+mkdir out beOut 2> /dev/null
+
 # For each day (set of frontend inputs)
 for dayFolder in $(ls ./res/userinput);do
 
@@ -11,7 +14,7 @@ for dayFolder in $(ls ./res/userinput);do
    done
 
    # Merge the transaction summary files after each day is run
-   python tsfMerge.py ./out/mergedTsf.txt `ls ./out/`
+   python tsfMerge.py ./out/mergedTsf.txt `find ./out -name *.txt`
 
    # Run the backend
    python ../backend/main.py -a ./res/masterAccountsFile.txt -t ./out/mergedTsf.txt -v ./beOut/validAccountsFile.txt -o ./beOut/masterAccountsFile.txt
