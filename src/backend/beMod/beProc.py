@@ -318,3 +318,6 @@ def writeValidAccountsList(outFile, accountsDict):
     for account in sorted(accountsDict.keys()):
         # Write it to the file, appending a newline
         outFile.write(account + "\n")
+
+    # Write the final 0000000 account number to indicate end of the list
+    outFile.write("0000000" + "\n")
