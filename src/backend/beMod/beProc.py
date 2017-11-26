@@ -274,7 +274,7 @@ def runTransaction(tx, accountsDict):
                 # Oh boy, special cases!
 
                 # For transfer, check that the from account exists
-                if tx["from"] not in accounsDict.keys:
+                if tx["from"] not in accountsDict.keys():
                     print beMessages.getMessage("accountDoesntExistErr",[tx["str"],tx["from"]])
 
                 # Ensure the from account has enough money to complete the transfer
