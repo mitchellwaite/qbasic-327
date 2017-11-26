@@ -93,7 +93,7 @@ def parseMasterAccountsFileLine(line):
     accountNumber = lineArr[0]
 
     # Check the validity of the account number.
-    beUtil.validateAccountNumber(accountNumber, line)
+    beUtil.validateAccountNumber(accountNumber)
 
     # Account balance should be the second field
     accountBalance = lineArr[1]
