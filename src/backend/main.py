@@ -39,10 +39,10 @@ def main():
                 mergedTransactionSummaryFilePath = arg
                 print beMessages.getMessage("mergedSummLoc", arg)
             elif opt == "-v":
-                outputValidAccountsFilePath = args
+                outputValidAccountsFilePath = arg
                 print beMessages.getMessage("outValidAccLoc", arg)
             elif opt == "-o":
-                outputMasterAccountsFilePath = args
+                outputMasterAccountsFilePath = arg
                 print beMessages.getMessage("outMasterAccLoc", arg)
 
     except Exception as e:
