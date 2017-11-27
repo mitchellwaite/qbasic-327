@@ -17,14 +17,14 @@ for dayFolder in $(ls ./res/userinput);do
    python tsfMerge.py ./out/mergedTsf.txt `find ./out -name *.txt`
 
    # Run the backend
-   python ../backend/main.py -a ./res/masterAccountsFile.txt -t ./out/mergedTsf.txt -v ./beOut/validAccountsFile.txt -o ./beOut/masterAccountsFile.txt
+   python ../backend/main.py -a ./res/masterAccountsFile.txt -t ./out/mergedTsf.txt -v ./beOut/validAccountsFile_$dayFolder.txt -o ./beOut/masterAccountsFile_$dayFolder.txt
 
    # Copy the backend outputs to the res folder so they can be used for
    # the next day
-   cp ./beOut/validAccountsFile.txt ./res/validAccountsFile.txt
-   cp ./beOut/masterAccountsFile.txt ./res/masterAccountsFile.txt
+   cp ./beOut/validAccountsFile_$dayFolder.txt ./res/validAccountsFile.txt
+   cp ./beOut/masterAccountsFile_$dayFolder.txt ./res/masterAccountsFile.txt
 
    # Clean up the output directories
-   rm ./beOut/*
+#   rm ./beOut/*
    rm ./out/*
 done
